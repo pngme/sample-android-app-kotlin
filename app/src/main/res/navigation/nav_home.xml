@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.samplekotlin.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="com.example.samplekotlin.home.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" >
+        <action
+            android:id="@+id/action_permissionFragment_to_loanApplicationFragment"
+            app:destination="@id/loanApplicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanApplicationFragment"
+        android:name="com.example.samplekotlin.home.LoanApplicationFragment"
+        android:label="fragment_loan_application"
+        tools:layout="@layout/fragment_loan_application" >
+        <action
+            android:id="@+id/action_loanApplicationFragment_to_sendLoanApplicationFragment"
+            app:destination="@id/sendLoanApplicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendLoanApplicationFragment"
+        android:name="com.example.samplekotlin.home.SendLoanApplicationFragment"
+        android:label="fragment_send_loan_application"
+        tools:layout="@layout/fragment_send_loan_application" >
+        <action
+            android:id="@+id/action_sendLoanApplicationFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+</navigation>

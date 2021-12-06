@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:padding="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -17,7 +18,7 @@
             android:text="Username" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:enabled="false"
@@ -31,18 +32,27 @@
             android:text="Password" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:enabled="false"
             android:hint="******" />
 
 
+
         <Button
-            android:id="@+id/go_to_signup"
+            android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            android:enabled="false"
+            android:text="Sign in" />
+
+        <Button
+            android:id="@+id/sign_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Sign up" />
 
     </LinearLayout>

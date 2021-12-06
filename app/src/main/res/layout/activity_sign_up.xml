@@ -8,13 +8,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:padding="20dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NEW USER" />
+            android:textSize="20sp"
+            android:text="New User" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
             android:text="First Name" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/first_name_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:hint="first name" />
@@ -36,7 +38,8 @@
             android:text="Last Name" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/last_name_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:hint="last name" />
@@ -48,7 +51,8 @@
             android:text="Email" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/email_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:hint="email" />
@@ -60,14 +64,15 @@
             android:text="Phone Number" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/phone_number_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:hint="phone number" />
 
 
         <Button
-            android:id="@+id/go_to_signup"
+            android:id="@+id/create_account_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"

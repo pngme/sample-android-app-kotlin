@@ -2,4 +2,9 @@
     <string name="app_name">SampleKotlin</string>
     <string name="bank_name">Acme Bank</string>
     <string name="splash_title">Welcome Acme Bank!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_devs">Hello! World\'s \nbest banking \napp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loan_amount_format">%d NGN</string>
 </resources>
