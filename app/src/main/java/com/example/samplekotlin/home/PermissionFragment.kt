@@ -48,7 +48,7 @@ class PermissionFragment : Fragment() {
             if (usePngmeCheckBox.isChecked) {
                 setPngmeAsChecked()
                 // PngmeSdk.resetPermissionFlow(context)
-                //startPngmeSDK()
+                startPngmeSDK()
             } else {
                 navigateToLoadApplication()
             }
