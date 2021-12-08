@@ -69,12 +69,32 @@
                 android:layout_marginTop="24dp"
                 android:text="Phone Number" />
 
-            <EditText
-                android:id="@+id/phone_number_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:hint="phone number" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/phone_number_prefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/phone_number_prefix" />
+
+                <EditText
+                    android:id="@+id/phone_number_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:hint="phone number"
+                    android:inputType="phone"
+                    android:maxLength="8" />
+
+            </LinearLayout>
 
 
             <Button
