@@ -37,10 +37,10 @@ class SignUpActivity : AppCompatActivity() {
         val phoneNumber = findViewById<EditText>(R.id.phone_number_text)
 
         val userInfo = User(
-            firstName.toString(),
-            lastName.toString(),
-            email.toString(),
-            phoneNumber.toString()
+            firstName.text.toString(),
+            lastName.text.toString(),
+            email.text.toString(),
+            getString(R.string.phone_number_prefix) + phoneNumber.text.toString()
         )
 
         val moshi = Moshi.Builder().build()
