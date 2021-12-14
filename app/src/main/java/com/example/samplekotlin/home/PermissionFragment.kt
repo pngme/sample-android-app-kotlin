@@ -2,6 +2,8 @@ package com.example.samplekotlin.home
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.CompoundButton
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.samplekotlin.BuildConfig
 import com.example.samplekotlin.R
@@ -47,7 +48,11 @@ class PermissionFragment : Fragment() {
             // save state of checkBox
             if (usePngmeCheckBox.isChecked) {
                 setPngmeAsChecked()
-                // PngmeSdk.resetPermissionFlow(context)
+                if (!smsPermissionGranted() && smsNeverPermanentlyIgnored()) {
+                    context?.let {
+                        PngmeSdk.resetPermissionFlow(it)
+                    }
+                }
                 startPngmeSDK()
             } else {
                 navigateToLoadApplication()
@@ -74,6 +79,18 @@ class PermissionFragment : Fragment() {
         }
     }
 
+    private fun smsPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(requireContext(),
+            android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun smsNeverPermanentlyIgnored(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+              (activity as MainActivity).shouldShowRequestPermissionRationale(android.Manifest.permission.READ_SMS)
+        } else {
+            true
+        }
+    }
 
     private fun setPngmeAsChecked() {
         getSharedPreference()?.edit {
