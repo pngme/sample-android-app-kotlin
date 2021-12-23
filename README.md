@@ -1,15 +1,22 @@
 # Pngme Android (Kotlin) SDK & sample App
 
-Welcome to the Pngme v2.x SDK!
+*Welcome to the Pngme v2.x SDK!*<br>
 This Readme will cover how the SDK works, get-started basics, and an example Android app.
 
+### *Legacy SDK
 For documentation on the legacy SDK (v1.0.34) visit [here](https://developers.api.pngme.com/docs).
 
-_For the v2.x *React Native* docs and sample app, visit here (TBD)._
+### React Native
+For the v2.x *React Native* docs and sample app, visit [here](https://github.com/pngme/sample-android-app-react-native).
 
-_For the v2.x *Flutter* docs app, visit here (TBD)_
+### Flutter
+For the v2.x *Flutter* docs app, ~~visit her~~ *(COMING SOON)*
 
 ## Kotlin v2.x SDK - the basics
+
+To use the Android SDK and REST APIs, you will need an SDK `clientKey` and a REST API Bearer `token`.
+Both can be found in the [pngme admin webconsole](https://admin.pngme.com).
+*Signing up for an account and getting started is free!*
 
 - The SDK accomplishes three tasks:
   - register a user with pngme's identity system
@@ -18,21 +25,17 @@ _For the v2.x *Flutter* docs app, visit here (TBD)_
 - The SDK supports Android API level 16+
 - The SDK exposes three methods: a main entrypoint method, and two helper methods
 - Using the SDK requires an SDK `clientKey`, 
-  available at the [pngme admin webconsole](https://admin.pngme.com)
+  available in the [Pngme Admin Webconsole](https://admin.pngme.com)
 
-The Pngme SDK sends a user's SMS messages to Pngme's data processing system.
-The data processing system extracts financial and alternative data for the user,
-and exposes those for retrieval at Pngme's suite of REST APIs 
+Financial data extracted using the SDK is accessible 
+in the [Pngme Admin Webconsole](https://admin.pngme.com) or
+via the Pngme REST APIs
 (see the [API Reference docs](https://developers.api.pngme.com/reference/getting-started-with-your-api)).
-
-To use the Android SDK and REST APIs, you will need an SDK `clientKey` and REST API `token`.
-Both can be found in the [pngme admin webconsole](https://admin.pngme.com).
-Signing up for an account and getting started is free!
 
 ## get started
 To set up your project to use the Pngme SDK, follow these setup steps.
 
-_Step 1_
+### _Step 1_
 Resolve the JitPack package manager in your Gradle file.
 Add the following to `build.gradle`.
 ```groovy
@@ -43,7 +46,7 @@ Add the following to `build.gradle`.
     }
 ```
 
-_Step 2_
+### _Step 2_
 Add the SDK package to your Gradle file.
 Add the following to `build.gradle`.
 ```groovy
@@ -52,8 +55,16 @@ Add the following to `build.gradle`.
     }
 ```
 
-_Step 3_
+### _Step 3_
+Add your SDK `clientKey` to the project.
+In the example app, the `clientKey` is injected via the `local.properties` file.
+*For production applications*, it is highly recommended that developers use a secure method for injecting the `clientKey`.
+See here for some recommended methods:
+[How to secure secrets in Android](https://blog.kotlin-academy.com/how-to-secure-secrets-in-android-android-security-01-a345e97c82be).
+
+### _Step 4_
 Implement the `PngmeSdk.go()` method as needed in your app.
+
 
 ## Methods
 ### `PngmeSdk.go()`
@@ -151,3 +162,18 @@ Returns `false` if the user has denied the SMS permission request.
 This repository is an example Android app, which uses the Pngme SDK.
 
 TODO - complete this section
+
+## Publishing to the Google Store
+So you have a working app! Congrats! But... it's not over yet. 
+You will still need to whitelist your app with the Google Play store.  
+This is a special step necessary for any apps that require SMS permissions from the user.
+
+The whitelisting process is not hard, but if you have never whitelisted an app before, you may want assistance. 
+Pngme can offer support in whitelisting your app, free of charge.
+Simply [contact us](mailto:whitelisting@pngme.com) 
+and also visit our guide: [Going Live](https://developers.api.pngme.com/docs/going-live-with-the-sdk).
+We'll help you get your app through the approval process faster than you can say `Hello World!`
+
+If you insist on whitelisting your app without Pngme's assistance, 
+please let us know and we will provide you with instructions. 
+These will help you avoid setbacks when submitting your app for review.
