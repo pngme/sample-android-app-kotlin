@@ -3,7 +3,7 @@
 *Welcome to the Pngme v2.x SDK!*<br>
 This Readme will cover how the SDK works, get-started basics, and an example Android app.
 
-### *Legacy SDK
+### Legacy SDK
 For documentation on the legacy SDK (v1.0.34) visit [here](https://developers.api.pngme.com/docs).
 
 ### React Native
@@ -158,10 +158,63 @@ Returns `false` if the user has denied the SMS permission request.
 | -------- | ----------- |
 | context | the current app Context |
 
-## example app
-This repository is an example Android app, which uses the Pngme SDK.
+## sample app
+This repository is a sample Android app, which uses the Pngme SDK.
+This app uses the `local.properties` file to inject the SDK `clientKey`.
+Please note that this is for example purposes only.
+As noted in [Step 3](### _Step 3_) of the get [started section](## get started), 
+it is highly recommended that a production application use a more secure method of injecting the `clientKey` secret.
 
-TODO - complete this section
+This app can be compiled and emulated locally, with or without a valid SDK `clientKey`.
+If a valid SDK `clientKey` is used, then data can be sent thru to the pngme system while testing in emulation mode.
+
+### Behavior
+The sample app demonstrates a simple flow:
+1. user creates an account with the app
+2. the user goes to apply for a loan, and has the option of selecting to use the Pngme service
+3. if the Pngme service is selected, the SDK is invoked, and the [Permission Flow](.docs/permission_flow.gif) is presented
+4. when the permission flow exits, the user is presented with the loan application page
+
+The SDK is implemented in the `PermissionFragment`, when the user clicks on the *Continue* button:
+```kotlin
+continueButton.setOnClickListener {
+            // save state of checkBox
+            if (usePngmeCheckBox.isChecked) {
+                setPngmeAsChecked()
+                startPngmeSDK()
+            } else {
+                navigateToLoadApplication()
+            }
+        }
+```
+
+The app remembers the selection in step 2.
+If the user chooses to enable the Pngme service, 
+then the checkbox stays selected for all future loan applications.
+The [Permission Flow](.docs/permission_flow.gif) is only showed the very first time, 
+_regardless of if the user accepts or denies the permissions_.
+
+Alternative behavior is to continue requesting SMS permissions if they were previously denied.
+Adding the following snippet will reset the Permission Flow 
+if SMS permissions had been previously denied but not permanently ignored.
+
+```kotlin
+continueButton.setOnClickListener {
+            // save state of checkBox
+            if (usePngmeCheckBox.isChecked) {
+                setPngmeAsChecked()
+                if (!smsPermissionGranted() && smsNeverPermanentlyIgnored()) {
+                    context?.let {
+                        PngmeSdk.resetPermissionFlow(it)
+                    }
+                }
+                startPngmeSDK()
+            } else {
+                navigateToLoadApplication()
+            }
+        }
+```
+
 
 ## Publishing to the Google Store
 So you have a working app! Congrats! But... it's not over yet. 
