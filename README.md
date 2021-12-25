@@ -1,6 +1,6 @@
 # Pngme Android (Kotlin) SDK & sample App
 
-*Welcome to the Pngme v2.x SDK!*<br>
+*Welcome to the Pngme v2.x Kotlin SDK!*<br>
 This Readme will cover how the SDK works, get-started basics, and an example Android app.
 
 ### Legacy SDK
