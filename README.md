@@ -32,7 +32,7 @@ in the [Pngme Admin Webconsole](https://admin.pngme.com) or
 via the Pngme REST APIs
 (see the [API Reference docs](https://developers.api.pngme.com/reference/getting-started-with-your-api)).
 
-## get started
+## Get Started
 To set up your project to use the Pngme SDK, follow these setup steps.
 
 ### _Step 1_
@@ -158,7 +158,7 @@ Returns `false` if the user has denied the SMS permission request.
 | -------- | ----------- |
 | context | the current app Context |
 
-## sample app
+## Sample Android App
 This repository is a sample Android app, which uses the Pngme SDK.
 This app uses the `local.properties` file to inject the SDK `clientKey`.
 Please note that this is for example purposes only.
@@ -194,9 +194,10 @@ then the checkbox stays selected for all future loan applications.
 The [Permission Flow](.docs/permission_flow.gif) is only showed the very first time, 
 _regardless of if the user accepts or denies the permissions_.
 
+#### Show Permissions Flow Multiple Times
 Alternative behavior is to continue requesting SMS permissions if they were previously denied.
 Adding the following snippet will reset the Permission Flow 
-if SMS permissions had been previously denied but not permanently ignored.
+if SMS permissions had been previously denied but not [permanently ignored](.docs/permissions.md).
 
 ```kotlin
 continueButton.setOnClickListener {
@@ -214,7 +215,6 @@ continueButton.setOnClickListener {
             }
         }
 ```
-
 
 ## Publishing to the Google Store
 So you have a working app! Congrats! But... it's not over yet. 
