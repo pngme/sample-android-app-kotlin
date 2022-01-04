@@ -131,10 +131,10 @@ The next time you call `go`, the Permission Dialog Flow will show again.
 
 Example:
 ```kotlin
-PngmeSdk.go() // permissions flow runs
-PngmeSdk.go()  // permission flow will NOT show again
-PngmeSdk.resetPermissionFlow()
-PngmeSdk.go()  // permission flow runs
+PngmeSdk.go(args) // permissions flow runs
+PngmeSdk.go(args)  // permission flow will NOT show again
+PngmeSdk.resetPermissionFlow(args)
+PngmeSdk.go(args)  // permission flow runs
 ```
 
 See the code snippets in the below documentation on the example app 
