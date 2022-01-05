@@ -181,7 +181,22 @@ continueButton.setOnClickListener {
             // save state of checkBox
             if (usePngmeCheckBox.isChecked) {
                 setPngmeAsChecked()
-                startPngmeSDK()
+                val mainActivity = (activity as MainActivity)
+                getUser()?.let { user ->
+                    PngmeSdk.go(
+                        mainActivity,
+                        BuildConfig.CLIENT_KEY,
+                        user.firstName,
+                        user.lastName,
+                        user.email,
+                        user.phoneNumber,
+                        "",
+                        false,
+                        MainActivity.COMPANY_NAME
+                    ) {
+                        navigateToLoadApplication()
+                    }
+                }
             } else {
                 navigateToLoadApplication()
             }
@@ -209,7 +224,22 @@ continueButton.setOnClickListener {
                         PngmeSdk.resetPermissionFlow(it)
                     }
                 }
-                startPngmeSDK()
+                val mainActivity = (activity as MainActivity)
+                getUser()?.let { user ->
+                    PngmeSdk.go(
+                        mainActivity,
+                        BuildConfig.CLIENT_KEY,
+                        user.firstName,
+                        user.lastName,
+                        user.email,
+                        user.phoneNumber,
+                        "",
+                        false,
+                        MainActivity.COMPANY_NAME
+                    ) {
+                        navigateToLoadApplication()
+                    }
+                }
             } else {
                 navigateToLoadApplication()
             }
