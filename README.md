@@ -246,6 +246,38 @@ continueButton.setOnClickListener {
         }
 ```
 
+## Send SMS data locally
+As noted above, the primary responsibility of the Pngme SDK is to send SMS data to the Pngme system.
+This can be tested in a sample app running in the local emulator, 
+assuming the emulated app is running with a valid SDK token.
+
+The following text message is of a recognized format for the sender `StanbicBank`.
+```text
+Acc:XXXXXX1111
+CR:NGN4,000.00
+Desc:HELLO WORLD! SAMPLE MESSAGE
+Date:01-01-1970 01:01
+Bal:NGN50,000.00
+Call 0000 000 000 000
+```
+
+You can inject this fake SMS into the emulated phone by following these steps.
+It is advisable that you pre-populate the emulated phone with the SMS _before_ running the sample app.
+
+![Inject Fake SMS](.docs/inject_fake_sms.png)
+
+1. Open the `more` window in the emulator settings
+2. Navigate to the `phone` section
+3. Set the sender to the string `StanbicBank`
+4. Copy/Paste the above same message into the message box
+5. Hit `Send Message`
+
+After following the above steps to send a fake SMS, run the sample app.
+The fake SMS will be sent to Pngme system using the SDK token from your Pngme account.
+If the sample app runs successfully, the financial data in the text message will be accessible
+via the [Pngme REST APIs](https://developers.api.pngme.com/reference/getting-started-with-your-api) or in the [Pngme webconsole](https://admin.pngme.com).
+
+
 ## Publishing to the Google Store
 So you have a working app! Congrats! But... it's not over yet. 
 You will still need to whitelist your app with the Google Play store.  
