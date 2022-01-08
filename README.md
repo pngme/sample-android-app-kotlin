@@ -163,6 +163,13 @@ it is highly recommended that a production application use a more secure method 
 This app can be compiled and emulated locally, with or without a valid SDK `clientKey`.
 If a valid SDK `clientKey` is used, then data can be sent thru to the Pngme system.
 
+### Setup
+Add the following to your `local.properties` file:
+```text
+SHARED_PREF_NAME=<my_pref>
+CLIENT_KEY=<my_app_clientkey>
+```
+
 ### Behavior
 The sample app demonstrates a simple flow:
 1. user creates an account with the app
