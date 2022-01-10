@@ -97,7 +97,7 @@ The `go` method is idempotent, and can be invoked multiple times.
 
 The `go` method performs three tasks.
 1. register a `user` in Pngme's system using an Android Onetime Worker
-2. show a dialog flow in the current Activity to request SMS permissions from the user -- 
+2. show a [Permission Dialog Flow](.docs/permission_flow.gif) in the current Activity to request SMS permissions from the user -- 
    this _runs the first time, and only the first time_, that `go` is invoked
 3. check for new SMS messages and send them to Pngme's system every 30 minutes using an Android Periodic Worker
 
