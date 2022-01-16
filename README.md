@@ -166,9 +166,13 @@ If a valid SDK `clientKey` is used, then data can be sent thru to the Pngme syst
 ### Setup
 Add the following to your `local.properties` file:
 ```text
-SHARED_PREF_NAME=<my_pref>
+SHARED_PREF_NAME=my_app_shared_pref
 CLIENT_KEY=<my_app_clientkey>
 ```
+
+Replace `<my_app_clientkey>` with a your SDK client key. 
+As noted, the app can build and be emulated without a valid SDK key.
+However, a valid SDK key is necessary to send sample data to the Pngme system.
 
 ### Behavior
 The sample app demonstrates a simple flow:
