@@ -262,9 +262,7 @@ The following text message is of a recognized format for the Stanbic bank sender
 Acc:XXXXXX1111
 CR:NGN4,000.00
 Desc:HELLO WORLD! SAMPLE MESSAGE
-Date:01-01-1970 01:01
 Bal:NGN50,000.00
-Call 0000 000 000 000
 ```
 
 You can inject this fake SMS into the emulated phone by following these steps.
