@@ -4,7 +4,7 @@
 This Readme will cover how the SDK works, get-started basics, and a sample Android app.
 
 ### Legacy SDK
-For documentation on the legacy SDK (v1.0.34) visit [here](https://developers.api.pngme.com/docs).
+[Contact Pngme](mailto:support@pngme.com) for documentation on the legacy SDK (v1.0.34).
 
 ### React Native
 For the v2.x *React Native* docs and sample app, visit [here](https://github.com/pngme/sample-android-app-react-native).
