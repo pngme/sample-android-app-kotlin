@@ -43,10 +43,9 @@ Add the following to `build.gradle`.
 ### _Step 2_
 Add the SDK package to your Gradle file.
 Add the following to `build.gradle`
-(substitute the exact SDK version).
 ```groovy
     dependencies {
-        implementation 'com.github.pngme:android-sdk:v2.Y.Z'
+        implementation 'com.github.pngme:android-sdk:v2.0.4'
     }
 ```
 
