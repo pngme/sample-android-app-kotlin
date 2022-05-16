@@ -19,7 +19,13 @@ For the v2.x *Flutter* docs app, visit [here](https://github.com/pngme/sample-an
    - periodically send SMS data to pngme's data processing pipeline
 2. The SDK supports Android API level 16+
 3. The SDK exposes three methods: a main entrypoint method, and two helper methods
-4. Using the SDK requires an SDK `clientKey`. Sign up and get started _for free_ at the [Pngme admin webconsole](https://admin.pngme.com)
+4. Using the SDK requires an **SDK Token** 
+   * To retrieve your **SDK Token**, sign up and **get started _for free_** at the [Pngme admin webconsole](https://admin.pngme.com)
+   * Once you have created your organization, navigate to `Keys` in the webconsole and copy the SDK Token for the environment you want to use
+
+ ![webconsole keys screen](.docs/webconsole_keys.png)
+
+   > Notice how **pngme** provides a `production` environment meant to receive real data from real final users on a `test` environment for testing and evaluation purposes
 
 When the SDK has been successfully integrated, financial data extracted from a user's SMS will be accessible
 in the [Pngme admin Webconsole](https://admin.pngme.com) or
@@ -50,9 +56,9 @@ Add the following to `build.gradle`
 ```
 
 ### _Step 3_
-Add your SDK `clientKey` to the project.
-In the sample app, the `clientKey` is injected via the `local.properties` file.
-*For production applications*, it is highly recommended that developers use a secure method for injecting the `clientKey`.
+Add your SDK Token to the project.
+In the sample app, the SDK Token is injected via the `local.properties` file.
+*For production applications*, it is highly recommended that developers use a secure method for injecting the SDK Token.
 See here for some recommended methods:
 [How to secure secrets in Android](https://blog.kotlin-academy.com/how-to-secure-secrets-in-android-android-security-01-a345e97c82be).
 
@@ -66,7 +72,7 @@ Implement the `PngmeSdk.go()` method as needed in your app.
 ```kotlin
  fun go(
      activity: AppCompatActivity,
-     clientKey: String,
+     clientKey: String, // This corresponds to the SDK Token
      firstName: String,
      lastName: String,
      email: String,
@@ -81,7 +87,7 @@ Implement the `PngmeSdk.go()` method as needed in your app.
 | var name | description |
 | -------- | ----------- |
 | activity | a reference to the current Activity |
-| clientKey | the Pngme SDK key for your account |
+| clientKey | the Pngme SDK Token for your account |
 | firstName | the mobile phone user's first name |
 | lastName | the mobile phone user's last name |
 | email | the mobile phone user's email address |
@@ -154,22 +160,24 @@ Returns `false` if the user has denied the SMS permission request.
 
 ## Sample Android App
 This repository is a sample Android app, which uses the Pngme SDK.
-This app uses the `local.properties` file to inject the SDK `clientKey`.
+This app uses the `local.properties` file to inject the SDK Token.
 Please note that this is for example purposes only.
 As noted in [Step 3](#_Step 3_) of the get [started section](#get started), 
-it is highly recommended that a production application use a more secure method of injecting the `clientKey` secret.
+it is highly recommended that a production application use a more secure method of injecting the SDK Token secret.
 
-This app can be compiled and emulated locally, with or without a valid SDK `clientKey`.
-If a valid SDK `clientKey` is used, then data can be sent thru to the Pngme system.
+This app can be compiled and emulated locally, with or without a valid SDK Token.
+If a valid SDK Token is used, then data can be sent thru to the Pngme system.
+
+> Before launching the app, you might want to have some SMS ready in the phone's inbox for faster testing. Refer to the section [Send SMS data locally](#Send-SMS-data-locally) down below
 
 ### Setup
 Add the following to your `local.properties` file:
 ```text
 SHARED_PREF_NAME=my_app_shared_pref
-CLIENT_KEY=<my_app_clientkey>
+SDK_TOKEN=<my_app_sdk_token>
 ```
 
-Replace `<my_app_clientkey>` with a your SDK client key. 
+Replace `<my_app_sdk_token>` with a your SDK Token from the webconsole. 
 As noted, the app can build and be emulated without a valid SDK key.
 However, a valid SDK key is necessary to send sample data to the Pngme system.
 
@@ -190,7 +198,7 @@ continueButton.setOnClickListener {
                 getUser()?.let { user ->
                     PngmeSdk.go(
                         mainActivity,
-                        BuildConfig.CLIENT_KEY,
+                        BuildConfig.SDK_TOKEN,
                         user.firstName,
                         user.lastName,
                         user.email,
@@ -233,7 +241,7 @@ continueButton.setOnClickListener {
                 getUser()?.let { user ->
                     PngmeSdk.go(
                         mainActivity,
-                        BuildConfig.CLIENT_KEY,
+                        BuildConfig.SDK_TOKEN,
                         user.firstName,
                         user.lastName,
                         user.email,
@@ -256,6 +264,8 @@ As noted above, the primary responsibility of the Pngme SDK is to send SMS data 
 This can be tested in a sample app running in the local emulator, 
 assuming the emulated app is running with a valid SDK token.
 
+Android Emulator can simulate incoming SMS messages, and we can use this to test the Pngme SDK locally.
+
 The following text message is of a recognized format for the Stanbic bank sender: `Stanbic`.
 ```text
 Acc:XXXXXX1111
@@ -265,7 +275,10 @@ Bal:NGN50,000.00
 ```
 
 You can inject this fake SMS into the emulated phone by following these steps.
-It is advisable that you pre-populate the emulated phone with the SMS _before_ running the sample app.
+
+> Once the app gets the permissions form the user it will instantly start sending existing SMS messages to the Pngme system. This results in messages being seen much sooner than SMS received after the app was installed.
+ > 
+ > As stated before, the daemon is processing new messages every 30 minutes, so the new feed messages will take at least 30 minutes to appear in the webconsole.
 
 ![Inject Fake SMS](.docs/inject_fake_sms.png)
 
