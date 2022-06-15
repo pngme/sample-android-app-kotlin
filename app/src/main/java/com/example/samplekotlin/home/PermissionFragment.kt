@@ -57,7 +57,7 @@ class PermissionFragment : Fragment() {
                 getUser()?.let { user ->
                     PngmeSdk.go(
                         mainActivity,
-                        BuildConfig.SDK_TOKEN,
+                        BuildConfig.PNGME_SDK_TOKEN,
                         user.firstName,
                         user.lastName,
                         user.email,
