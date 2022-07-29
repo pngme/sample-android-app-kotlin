@@ -274,7 +274,7 @@ You can inject this fake SMS into the emulated phone by following these steps.
 
 1. Open the `more` window in the emulator settings
 2. Navigate to the `phone` section
-3. Set the sender to the string `Stanbic`
+3. Set the sender to the string `Stanbic` or one of the senders from our [supported institutions](https://developers.api.pngme.com/reference/supported-institutions)
 4. Copy/Paste the above same message into the message box
 5. Hit `Send Message`
 
