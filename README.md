@@ -5,7 +5,7 @@
 
 This documentation covers how to use the Pngme SDK with Kotlin.
 
-You can find similar documentation for [Flutter](https://github.com/pngme/sample-android-app-flutter) and [React Native](https://github.com/pngme/sample-android-app-react-native).
+You can find similar documentation for [Flutter](https://github.com/pngme/sample-android-app-flutter), [Expo](https://github.com/pngme/sample-android-app-react-native-expo), and [React Native](https://github.com/pngme/sample-android-app-react-native).
 
 ## Setup
 
