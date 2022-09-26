@@ -6,12 +6,13 @@ plugins {
 }
 
 android {
-    compileSdk 31
-
+    compileSdk 32
+    buildToolsVersion "33.0.0"
+    
     defaultConfig {
         applicationId "com.example.samplekotlin"
         minSdk 16
-        targetSdk 31
+        targetSdk 32
         versionCode 1
         versionName "1.0"
         ndkVersion = "23.1.7779620"

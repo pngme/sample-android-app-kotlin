@@ -157,6 +157,19 @@ If a valid SDK Token is used, then data can be sent thru to the Pngme system.
 
 > Before launching the app, you might want to have some SMS ready in the phone's inbox for faster testing. Refer to the section [Send SMS data locally](#Send-SMS-data-locally) down below
 
+### Running the app
+
+Debug version:
+
+```bash
+./gradlew app:installDebug
+```
+
+Building the app:
+
+```bash
+./gradlew
+```
 ### Setup
 
 Add the following to your `local.properties` file:
