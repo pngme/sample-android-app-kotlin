@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Acme Bank</string>
+    <string name="app_name">Acme Bank - Kotlin</string>
     <string name="bank_name">Acme Bank</string>
     <string name="splash_title">Welcome Acme Bank!</string>
     <!-- TODO: Remove or change this placeholder text -->

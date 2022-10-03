@@ -64,10 +64,10 @@ class PermissionFragment : Fragment() {
                         user.phoneNumber,
                         "",
                         false,
-                        MainActivity.COMPANY_NAME
-                    ) {
-                        navigateToLoadApplication()
-                    }
+                        MainActivity.COMPANY_NAME,
+                        {navigateToLoadApplication()},
+                        true,
+                    )
                 }
             } else {
                 navigateToLoadApplication()
