@@ -2,16 +2,18 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.google.secrets_gradle_plugin' version '0.4'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
-    compileSdk 31
-
+    namespace "com.example.samplekotlin"
+    compileSdk 33
+    buildToolsVersion "33.0.0"
+    
     defaultConfig {
         applicationId "com.example.samplekotlin"
         minSdk 16
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         ndkVersion = "23.1.7779620"
