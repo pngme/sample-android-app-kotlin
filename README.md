@@ -44,7 +44,7 @@ Add the following dependencies to `/app/build.gradle`.
 
 ```groovy
     dependencies {
-        implementation 'com.github.pngme:android-sdk:v2.0.4'
+        implementation 'com.github.pngme:android-sdk:3.2.0'
     }
 ```
 
@@ -170,6 +170,7 @@ Building the app:
 ```bash
 ./gradlew
 ```
+
 ### Setup
 
 Add the following to your `local.properties` file:
@@ -187,8 +188,7 @@ The sample app demonstrates a simple flow:
 2. the user goes to apply for a loan, and has the option of selecting to use the Pngme service
 3. if the Pngme service is selected, the SDK is invoked, and the [Permission Flow](.docs/permission_flow.gif) is presented
 
-<sub>- :warning: _Note that if a user chooses to hide the permissions flow, they will need to design their own information and consent screen compliant with Google Whitelisting requirements. Consult with <support@pngme.com> if you would like assistance with this process._</sub>
-4. when the permission flow exits, the user is presented with the loan application page
+<sub>- :warning: _Note that if a user chooses to hide the permissions flow, they will need to design their own information and consent screen compliant with Google Whitelisting requirements. Consult with <support@pngme.com> if you would like assistance with this process._</sub> 4. when the permission flow exits, the user is presented with the loan application page
 
 The SDK is implemented in the `PermissionFragment`, when the user clicks on the _Continue_ button:
 
