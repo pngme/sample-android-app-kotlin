@@ -90,18 +90,17 @@ The `go` method performs three tasks.
    by default, this _runs the first time, and only the first time_, that `go` is invoked
 3. check for new SMS messages and send them to Pngme's system every 30 minutes using an Android Background Worker
 
-| Field         | Description                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------ |
-| activity      | a reference to the current Activity                                                                                |
-| clientKey     | the SDK Token from the [Pngme Dashboard Keys page](https://admin.pngme.com/keys)                                   |
-| firstName     | the mobile phone user's first name                                                                                 |
-| lastName      | the mobile phone user's last name                                                                                  |
-| email         | the mobile phone user's email address                                                                              |
-| phoneNumber   | the mobile phone user's phone number, example `"23411234567"`                                                      |
-| externalId    | a unique identifier provided by your app (if none available, pass an empty string `""`)                            |
-| isKycVerified | a boolean, indicating if your app has verified the user's identity using KYC                                       |
-| companyName   | your company's name; this is used in the display header of the [Permission Dialog Flow](.docs/permission_flow.gif) |
-| onComplete    | a callback function that is called when the `go` method has completed                                              |
+| Field       | Description                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| activity    | a reference to the current Activity                                                                                |
+| clientKey   | the SDK Token from the [Pngme Dashboard Keys page](https://admin.pngme.com/keys)                                   |
+| firstName   | the mobile phone user's first name                                                                                 |
+| lastName    | the mobile phone user's last name                                                                                  |
+| email       | the mobile phone user's email address                                                                              |
+| phoneNumber | the mobile phone user's phone number, example `"23411234567"`                                                      |
+| externalId  | a unique identifier provided by your app (if none available, pass an empty string `""`)                            |
+| companyName | your company's name; this is used in the display header of the [Permission Dialog Flow](.docs/permission_flow.gif) |
+| onComplete  | a callback function that is called when the `go` method has completed                                              |
 
 #### The onComplete callback
 
@@ -207,7 +206,6 @@ continueButton.setOnClickListener {
                 user.email,
                 user.phoneNumber,
                 "",
-                false,
                 MainActivity.COMPANY_NAME
             ) {
                 navigateToLoadApplication()
