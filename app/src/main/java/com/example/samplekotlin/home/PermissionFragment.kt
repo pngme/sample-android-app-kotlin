@@ -63,7 +63,6 @@ class PermissionFragment : Fragment() {
                         user.email,
                         user.phoneNumber,
                         "",
-                        false,
                         MainActivity.COMPANY_NAME
                     ) {
                         navigateToLoadApplication()
