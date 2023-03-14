@@ -44,7 +44,7 @@ Add the following dependencies to `/app/build.gradle`.
 
 ```groovy
     dependencies {
-        implementation 'com.github.pngme:android-sdk:3.2.0'
+        implementation 'com.github.pngme:android-sdk:4.0.2'
     }
 ```
 
@@ -75,7 +75,6 @@ Call the `PngmeSdk.go()` method in your app where you would like to trigger the 
      email: String,
      phoneNumber: String,
      externalId: String,
-     isKycVerified: Boolean,
      companyName: String,
      onComplete: Callback? = null
  )
