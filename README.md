@@ -233,7 +233,7 @@ continueButton.setOnClickListener {
     // save state of checkBox
     if (usePngmeCheckBox.isChecked) {
         setPngmeAsChecked()
-        if (!smsPermissionGranted() && smsNeverPermanentlyIgnored()) {
+        if (!PngmeSdk.isPermissionGranted(it) && smsNeverPermanentlyIgnored()) {
             context?.let {
                 PngmeSdk.resetPermissionFlow(it)
             }
