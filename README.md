@@ -44,7 +44,7 @@ Add the following dependencies to `/app/build.gradle`.
 
 ```groovy
     dependencies {
-        implementation 'com.github.pngme:android-sdk:4.0.2'
+        implementation 'com.github.pngme:android-sdk:5.0.0'
     }
 ```
 
@@ -79,8 +79,22 @@ Call the `PngmeSdk.go()` method in your app where you would like to trigger the 
      onComplete: Callback? = null
  )
 ```
+If you would like to use your own onboarding flow in which a user is presented with Pngme's terms & conditions and privacy policy, you can use the `goWithCustomDialog` method.
 
-> The `go()` method can be safely invoked multiple times. The user will only be prompted for permissions when `go()` is called (1) the first time or (2) after `resetPermissionFlow()`.
+```kotlin
+ fun goWithCustomDialog(
+     activity: AppCompatActivity,
+     clientKey: String, // pass the SDK token here
+     firstName: String,
+     lastName: String,
+     email: String,
+     phoneNumber: String,
+     externalId: String,
+     companyName: String,
+     hasAcceptedTerms: Boolean, // default is false
+     onComplete: Callback? = null
+ )
+```
 
 The `go` method performs three tasks.
 
@@ -99,6 +113,7 @@ The `go` method performs three tasks.
 | phoneNumber | the mobile phone user's phone number, example `"23411234567"`                                                      |
 | externalId  | a unique identifier provided by your app (if none available, pass an empty string `""`)                            |
 | companyName | your company's name; this is used in the display header of the [Permission Dialog Flow](.docs/permission_flow.gif) |
+| hasAcceptedTerms | Set the value to 'true' if the user has accepted the terms and conditions when invoking the 'goWithCustomDialog' method. Defaults to false |
 | onComplete  | a callback function that is called when the `go` method has completed                                              |
 
 #### The onComplete callback
@@ -115,34 +130,6 @@ The `onComplete` callback will be invoked when three conditions are satisfied:
 2. the Period Worker for periodically sending SMS data to Pngme's system has been instantiated
 3. the Permission Dialog Flow has exited
 
-### `resetPermissionFlow()`
-
-```kotlin
-fun resetPermissionFlow(context: Context)
-```
-
-| Field   | Description             |
-| ------- | ----------------------- |
-| context | the current app Context |
-
-The [Permission Dialog Flow](.docs/permission_flow.gif) will only run the first time that the `go` method is invoked.
-If your app needs to implement logic to show the Dialog Flow again,
-then you can reset the permission flow by calling `resetPermissionFlow`.
-
-### `isPermissionGranted()`
-
-```kotlin
-fun isPermissionGranted(context: Context): Boolean
-```
-
-| Field   | Description             |
-| ------- | ----------------------- |
-| context | the current app Context |
-
-This indicates if the user has accepted the SMS permissions request:
-
-- Returns `true` if the user has accepted the SMS permission request.
-- Returns `false` if the user has denied the SMS permission request.
 
 ## Sample Android App
 
@@ -233,11 +220,6 @@ continueButton.setOnClickListener {
     // save state of checkBox
     if (usePngmeCheckBox.isChecked) {
         setPngmeAsChecked()
-        if (!smsPermissionGranted() && smsNeverPermanentlyIgnored()) {
-            context?.let {
-                PngmeSdk.resetPermissionFlow(it)
-            }
-        }
         val mainActivity = (activity as MainActivity)
         getUser()?.let { user ->
             PngmeSdk.go(
