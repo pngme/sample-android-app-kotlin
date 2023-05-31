@@ -130,6 +130,20 @@ The `onComplete` callback will be invoked when three conditions are satisfied:
 2. the Period Worker for periodically sending SMS data to Pngme's system has been instantiated
 3. the Permission Dialog Flow has exited
 
+### `isPermissionGranted()`
+
+```kotlin
+fun isPermissionGranted(context: Context): Boolean
+```
+
+| Field   | Description             |
+| ------- | ----------------------- |
+| context | the current app Context |
+
+This indicates if the user has accepted the SMS permissions request:
+
+- Returns `true` if the user has accepted the SMS permission request.
+- Returns `false` if the user has denied the SMS permission request.
 
 ## Sample Android App
 
