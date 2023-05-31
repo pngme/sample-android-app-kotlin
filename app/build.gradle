@@ -51,7 +51,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.pngme:android-sdk:4.0.2'
+    implementation 'com.github.pngme:android-sdk:5.0.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 

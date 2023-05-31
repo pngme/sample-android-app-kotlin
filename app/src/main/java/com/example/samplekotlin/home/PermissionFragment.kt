@@ -48,11 +48,6 @@ class PermissionFragment : Fragment() {
             // save state of checkBox
             if (usePngmeCheckBox.isChecked) {
                 setPngmeAsChecked()
-                if (!smsPermissionGranted() && smsNeverPermanentlyIgnored()) {
-                    context?.let {
-                        PngmeSdk.resetPermissionFlow(it)
-                    }
-                }
                 val mainActivity = (activity as MainActivity)
                 getUser()?.let { user ->
                     PngmeSdk.go(
@@ -71,19 +66,6 @@ class PermissionFragment : Fragment() {
             } else {
                 navigateToLoadApplication()
             }
-        }
-    }
-
-    private fun smsPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun smsNeverPermanentlyIgnored(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-              (activity as MainActivity).shouldShowRequestPermissionRationale(android.Manifest.permission.READ_SMS)
-        } else {
-            true
         }
     }
 
