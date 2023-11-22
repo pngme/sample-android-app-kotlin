@@ -70,10 +70,6 @@ Call the `PngmeSdk.go()` method in your app where you would like to trigger the 
  fun go(
      activity: AppCompatActivity,
      clientKey: String, // pass the SDK token here
-     firstName: String,
-     lastName: String,
-     email: String,
-     phoneNumber: String,
      externalId: String,
      companyName: String,
      onComplete: Callback? = null
@@ -85,10 +81,6 @@ If you would like to use your own onboarding flow in which a user is presented w
  fun goWithCustomDialog(
      activity: AppCompatActivity,
      clientKey: String, // pass the SDK token here
-     firstName: String,
-     lastName: String,
-     email: String,
-     phoneNumber: String,
      externalId: String,
      companyName: String,
      hasAcceptedTerms: Boolean, // default is false
@@ -107,10 +99,6 @@ The `go` method performs three tasks.
 | ----------- | ------------------------------------------------------------------------------------------------------------------ |
 | activity    | a reference to the current Activity                                                                                |
 | clientKey   | the SDK Token from the [Pngme Dashboard Keys page](https://admin.pngme.com/keys)                                   |
-| firstName   | the mobile phone user's first name                                                                                 |
-| lastName    | the mobile phone user's last name                                                                                  |
-| email       | the mobile phone user's email address                                                                              |
-| phoneNumber | the mobile phone user's phone number, example `"23411234567"`                                                      |
 | externalId  | a unique identifier provided by your app (if none available, pass an empty string `""`)                            |
 | companyName | your company's name; this is used in the display header of the [Permission Dialog Flow](.docs/permission_flow.gif) |
 | hasAcceptedTerms | Set the value to 'true' if the user has accepted the terms and conditions when invoking the 'goWithCustomDialog' method. Defaults to false |
@@ -199,14 +187,10 @@ continueButton.setOnClickListener {
         val mainActivity = (activity as MainActivity)
         getUser()?.let { user ->
             PngmeSdk.go(
-                mainActivity,
-                BuildConfig.PNGME_SDK_TOKEN,
-                user.firstName,
-                user.lastName,
-                user.email,
-                user.phoneNumber,
-                "",
-                MainActivity.COMPANY_NAME
+                activity = mainActivity,
+                clientKey = BuildConfig.PNGME_SDK_TOKEN,
+                externalId = "externalId",
+                companyName = MainActivity.COMPANY_NAME
             ) {
                 navigateToLoadApplication()
             }
@@ -237,15 +221,11 @@ continueButton.setOnClickListener {
         val mainActivity = (activity as MainActivity)
         getUser()?.let { user ->
             PngmeSdk.go(
-                mainActivity,
-                BuildConfig.PNGME_SDK_TOKEN,
-                user.firstName,
-                user.lastName,
-                user.email,
-                user.phoneNumber,
-                "",
-                false,
-                MainActivity.COMPANY_NAME
+                activity = mainActivity,
+                clientKey = BuildConfig.PNGME_SDK_TOKEN,
+                externalId = "externalId",
+                hasAcceptedTerms = false,
+                companyName = MainActivity.COMPANY_NAME
             ) {
                 navigateToLoadApplication()
             }

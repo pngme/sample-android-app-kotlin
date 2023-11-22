@@ -51,14 +51,10 @@ class PermissionFragment : Fragment() {
                 val mainActivity = (activity as MainActivity)
                 getUser()?.let { user ->
                     PngmeSdk.go(
-                        mainActivity,
-                        BuildConfig.PNGME_SDK_TOKEN,
-                        user.firstName,
-                        user.lastName,
-                        user.email,
-                        user.phoneNumber,
-                        "",
-                        MainActivity.COMPANY_NAME
+                        activity = mainActivity,
+                        clientKey = BuildConfig.PNGME_SDK_TOKEN,
+                        externalId = user.externalId,
+                        companyName = MainActivity.COMPANY_NAME
                     ) {
                         navigateToLoadApplication()
                     }

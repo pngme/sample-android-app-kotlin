@@ -31,16 +31,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun saveUserInputs() {
-        val firstName = findViewById<EditText>(R.id.first_name_text)
-        val lastName = findViewById<EditText>(R.id.last_name_text)
-        val email = findViewById<EditText>(R.id.email_text)
-        val phoneNumber = findViewById<EditText>(R.id.phone_number_text)
+        val externalId = findViewById<EditText>(R.id.external_id_text)
 
         val userInfo = User(
-            firstName.text.toString(),
-            lastName.text.toString(),
-            email.text.toString(),
-            getString(R.string.phone_number_prefix) + phoneNumber.text.toString()
+            externalId.text.toString(),
         )
 
         val moshi = Moshi.Builder().build()
