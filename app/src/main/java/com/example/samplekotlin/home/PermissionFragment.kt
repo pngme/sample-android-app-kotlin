@@ -50,11 +50,12 @@ class PermissionFragment : Fragment() {
                 setPngmeAsChecked()
                 val mainActivity = (activity as MainActivity)
                 getUser()?.let { user ->
-                    PngmeSdk.go(
+                    PngmeSdk.goWithCustomDialog(
                         activity = mainActivity,
                         clientKey = BuildConfig.PNGME_SDK_TOKEN,
                         externalId = user.externalId,
                         companyName = MainActivity.COMPANY_NAME
+                        hasAcceptedTerms = true, // set to true if user has given consent
                     ) {
                         navigateToLoadApplication()
                     }
