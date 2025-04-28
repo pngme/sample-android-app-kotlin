@@ -52,13 +52,18 @@ class PermissionFragment : Fragment() {
                 getUser()?.let { user ->
                     PngmeSdk.goWithCustomDialog(
                         activity = mainActivity,
-                        clientKey = BuildConfig.PNGME_SDK_TOKEN,
+                        clientKey = PNGME_CLIENT_KEY,
+                        firstName = "",
+                        lastName ="",
+                        email = "",
+                        phoneNumber = "",
                         externalId = user.externalId,
-                        companyName = MainActivity.COMPANY_NAME
+                        companyName = MainActivity.COMPANY_NAME,
                         hasAcceptedTerms = true, // set to true if user has given consent
-                    ) {
-                        navigateToLoadApplication()
-                    }
+                        onComplete = {
+                            navigateToLoadApplication()
+                        }
+                    )
                 }
             } else {
                 navigateToLoadApplication()
@@ -97,4 +102,8 @@ class PermissionFragment : Fragment() {
         }
     }
 
+    companion object {
+        // Add your Pngme SDK token here
+        private const val PNGME_CLIENT_KEY = "your_pngme_client_key_here"
+    }
 }
