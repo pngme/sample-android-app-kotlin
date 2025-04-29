@@ -2,8 +2,6 @@ package com.example.samplekotlin.home
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
-import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.navigation.Navigation
-import com.example.samplekotlin.BuildConfig
+import com.example.samplekotlin.Constants
 import com.example.samplekotlin.R
 import com.example.samplekotlin.model.User
 import com.pngme.sdk.library.PngmeSdk
@@ -52,7 +49,7 @@ class PermissionFragment : Fragment() {
                 getUser()?.let { user ->
                     PngmeSdk.goWithCustomDialog(
                         activity = mainActivity,
-                        clientKey = PNGME_CLIENT_KEY,
+                        clientKey = Constants.PNGME_CLIENT_KEY,
                         firstName = "",
                         lastName ="",
                         email = "",
@@ -90,7 +87,7 @@ class PermissionFragment : Fragment() {
 
     private fun getSharedPreference(): SharedPreferences? {
         return activity?.getSharedPreferences(
-            BuildConfig.SHARED_PREF_NAME,
+            Constants.SHARED_PREF_NAME,
             MODE_PRIVATE
         )
     }
@@ -100,10 +97,5 @@ class PermissionFragment : Fragment() {
             Navigation.findNavController(it)
                 .navigate(R.id.action_permissionFragment_to_loanApplicationFragment)
         }
-    }
-
-    companion object {
-        // Add your Pngme SDK token here
-        private const val PNGME_CLIENT_KEY = "your_pngme_client_key_here"
     }
 }

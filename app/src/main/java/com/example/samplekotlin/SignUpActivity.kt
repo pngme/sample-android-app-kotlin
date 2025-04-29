@@ -9,11 +9,7 @@ import androidx.core.content.edit
 import com.example.samplekotlin.home.MainActivity
 import com.example.samplekotlin.model.User
 import com.squareup.moshi.JsonAdapter
-
 import com.squareup.moshi.Moshi
-
-
-
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -41,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         val jsonAdapter: JsonAdapter<User> = moshi.adapter(User::class.java)
         val json = jsonAdapter.toJson(userInfo)
 
-        val sharedPreferences = getSharedPreferences(BuildConfig.SHARED_PREF_NAME, MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, MODE_PRIVATE)
         sharedPreferences.edit {
             putString("userInfo", json)
             apply()
