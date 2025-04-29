@@ -36,6 +36,57 @@
                 android:layout_marginTop="6dp"
                 android:hint="external id" />
 
+            <!-- First Name -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name" />
+            <EditText
+                android:id="@+id/first_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First name" />
+
+            <!-- Last Name -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name" />
+            <EditText
+                android:id="@+id/last_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last name" />
+
+            <!-- Email -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+            <EditText
+                android:id="@+id/email_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="you@example.com" />
+
+            <!-- Phone Number -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number" />
+            <EditText
+                android:id="@+id/phone_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="+254734567890" />
+
+            <!-- Create account -->
 
             <Button
                 android:id="@+id/create_account_button"

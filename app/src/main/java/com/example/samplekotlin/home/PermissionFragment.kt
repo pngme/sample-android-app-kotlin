@@ -51,12 +51,12 @@ class PermissionFragment : Fragment() {
                     PngmeSdk.goWithCustomDialog(
                         activity = mainActivity,
                         clientKey = BuildConfig.PNGME_SDK_TOKEN,
-                        firstName = "",
-                        lastName ="",
-                        email = "",
-                        phoneNumber = "",
-                        externalId = user.externalId,
-                        companyName = MainActivity.COMPANY_NAME,
+                        firstName    = user.firstName,
+                        lastName     = user.lastName,
+                        email        = user.email,
+                        phoneNumber  = user.phoneNumber,
+                        externalId   = user.externalId,
+                        companyName  = MainActivity.COMPANY_NAME,
                         hasAcceptedTerms = true, // set to true if user has given consent
                         onComplete = {
                             navigateToLoadApplication()
