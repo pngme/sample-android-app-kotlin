@@ -5,11 +5,23 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
+import java.util.Properties
+
+// 1. Load local.properties
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
+// 2. Read your PNGME_SDK_TOKEN (defaults to empty string if absent)
+def pngmeToken = localProperties.getProperty("PNGME_SDK_TOKEN", "")
+
 android {
     namespace "com.example.samplekotlin"
     compileSdk 34
     buildToolsVersion "34.0.0"
-    
+
     defaultConfig {
         applicationId "com.example.samplekotlin"
         minSdk 19
@@ -20,6 +32,9 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // 3. Inject into BuildConfig
+        buildConfigField "String", "PNGME_SDK_TOKEN", "\"${pngmeToken}\""
     }
 
     buildTypes {
@@ -43,7 +58,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'

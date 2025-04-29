@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import androidx.core.content.edit
 import androidx.navigation.Navigation
+import com.example.samplekotlin.BuildConfig
 import com.example.samplekotlin.Constants
 import com.example.samplekotlin.R
 import com.example.samplekotlin.model.User
@@ -49,7 +50,7 @@ class PermissionFragment : Fragment() {
                 getUser()?.let { user ->
                     PngmeSdk.goWithCustomDialog(
                         activity = mainActivity,
-                        clientKey = Constants.PNGME_CLIENT_KEY,
+                        clientKey = BuildConfig.PNGME_SDK_TOKEN,
                         firstName = "",
                         lastName ="",
                         email = "",
