@@ -59,7 +59,7 @@ class PermissionFragment : Fragment() {
                         titleTextSize         = 22f,
                         bodyTextSize          = 16f,
                         buttonTextSize        = 18f,
-                        customButtonText      = "Let’s Go!"
+                        customButtonText      = "Accept"
                     )
 
 
