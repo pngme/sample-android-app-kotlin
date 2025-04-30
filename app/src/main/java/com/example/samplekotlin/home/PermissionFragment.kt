@@ -2,22 +2,23 @@ package com.example.samplekotlin.home
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
+import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.example.samplekotlin.BuildConfig
+import com.example.samplekotlin.Constants
 import com.example.samplekotlin.R
 import com.example.samplekotlin.model.User
 import com.pngme.sdk.library.PngmeSdk
+import com.pngme.sdk.library.views.PngmeDialogStyle
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 
@@ -37,30 +38,62 @@ class PermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val continueButton = view.findViewById<Button>(R.id.next_button)
-        val usePngmeCheckBox = view.findViewById<CheckBox>(R.id.use_pngme_checkbox)
 
-        val pngmeChecked = wasPngmeChecked()
-        usePngmeCheckBox.isChecked = pngmeChecked
-        usePngmeCheckBox.isEnabled = !pngmeChecked
+        val styleGroup = view.findViewById<RadioGroup>(R.id.pngme_style_group)
+        val continueButton = view.findViewById<Button>(R.id.next_button)
 
         continueButton.setOnClickListener {
-            // save state of checkBox
-            if (usePngmeCheckBox.isChecked) {
+            val checkedId = styleGroup.checkedRadioButtonId
+            if (checkedId == R.id.option_default_pngme || checkedId == R.id.option_custom_pngme) {
                 setPngmeAsChecked()
-                val mainActivity = (activity as MainActivity)
+                val mainActivity = requireActivity() as MainActivity
+
                 getUser()?.let { user ->
-                    PngmeSdk.goWithCustomDialog(
-                        activity = mainActivity,
-                        clientKey = BuildConfig.PNGME_SDK_TOKEN,
-                        externalId = user.externalId,
-                        companyName = MainActivity.COMPANY_NAME
-                        hasAcceptedTerms = true, // set to true if user has given consent
-                    ) {
-                        navigateToLoadApplication()
+                    // build your custom style once
+                    val customStyle = PngmeDialogStyle(
+                        primaryColor          = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_primary),
+                        backgroundColor       = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_background),
+                        textColor             = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_text),
+                        buttonBackgroundColor = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_accent),
+                        buttonTextColor       = ContextCompat.getColor(requireContext(), R.color.white),
+                        titleTextSize         = 22f,
+                        bodyTextSize          = 16f,
+                        buttonTextSize        = 18f,
+                        customButtonText      = "Accept"
+                    )
+
+
+                    // choose overload
+                    if (checkedId == R.id.option_custom_pngme) {
+                        PngmeSdk.go(
+                            activity         = mainActivity,
+                            clientKey        = BuildConfig.PNGME_SDK_TOKEN,
+                            firstName        = user.firstName,
+                            lastName         = user.lastName,
+                            email            = user.email,
+                            phoneNumber      = user.phoneNumber,
+                            externalId       = user.externalId,
+                            companyName      = MainActivity.COMPANY_NAME,
+                            onComplete       = { navigateToLoadApplication() },
+                            dialogStyle      = customStyle
+                        )
+                    } else {
+                        PngmeSdk.goWithCustomDialog(
+                            activity         = mainActivity,
+                            clientKey        = BuildConfig.PNGME_SDK_TOKEN,
+                            firstName        = user.firstName,
+                            lastName         = user.lastName,
+                            email            = user.email,
+                            phoneNumber      = user.phoneNumber,
+                            externalId       = user.externalId,
+                            companyName      = MainActivity.COMPANY_NAME,
+                            hasAcceptedTerms = true,
+                            onComplete       = { navigateToLoadApplication() }
+                        )
                     }
                 }
             } else {
+                // no Pngme option selected
                 navigateToLoadApplication()
             }
         }
@@ -85,7 +118,7 @@ class PermissionFragment : Fragment() {
 
     private fun getSharedPreference(): SharedPreferences? {
         return activity?.getSharedPreferences(
-            BuildConfig.SHARED_PREF_NAME,
+            Constants.SHARED_PREF_NAME,
             MODE_PRIVATE
         )
     }
@@ -96,5 +129,4 @@ class PermissionFragment : Fragment() {
                 .navigate(R.id.action_permissionFragment_to_loanApplicationFragment)
         }
     }
-
 }
