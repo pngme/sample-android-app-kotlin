@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
+import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.navigation.Navigation
@@ -37,27 +38,23 @@ class PermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val styleGroup = view.findViewById<RadioGroup>(R.id.pngme_style_group)
         val continueButton = view.findViewById<Button>(R.id.next_button)
-        val usePngmeCheckBox = view.findViewById<CheckBox>(R.id.use_pngme_checkbox)
-        val customStyleCheckbox = view.findViewById<CheckBox>(
-            R.id.use_pngme_custom_style_checkbox
-        )
-        val pngmeChecked = wasPngmeChecked()
-        usePngmeCheckBox.isChecked = pngmeChecked
-        usePngmeCheckBox.isEnabled = !pngmeChecked
 
         continueButton.setOnClickListener {
-            // save state of checkBox
-            if (usePngmeCheckBox.isChecked) {
+            val checkedId = styleGroup.checkedRadioButtonId
+            if (checkedId == R.id.option_default_pngme || checkedId == R.id.option_custom_pngme) {
                 setPngmeAsChecked()
-                val mainActivity = (activity as MainActivity)
+                val mainActivity = requireActivity() as MainActivity
+
                 getUser()?.let { user ->
-                    // build a simple custom style example
+                    // build your custom style once
                     val customStyle = PngmeDialogStyle(
-                        primaryColor          = ContextCompat.getColor(requireContext(), R.color.purple_500),
-                        backgroundColor       = ContextCompat.getColor(requireContext(), R.color.white),
-                        textColor             = ContextCompat.getColor(requireContext(), R.color.black),
-                        buttonBackgroundColor = ContextCompat.getColor(requireContext(), R.color.teal_200),
+                        primaryColor          = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_primary),
+                        backgroundColor       = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_background),
+                        textColor             = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_text),
+                        buttonBackgroundColor = ContextCompat.getColor(requireContext(), R.color.sample_custom_styling_accent),
                         buttonTextColor       = ContextCompat.getColor(requireContext(), R.color.white),
                         titleTextSize         = 22f,
                         bodyTextSize          = 16f,
@@ -65,37 +62,38 @@ class PermissionFragment : Fragment() {
                         customButtonText      = "Let’s Go!"
                     )
 
-                    // choose overload depending on whether custom-style box is checked
-                    if (customStyleCheckbox.isChecked) {
-                        PngmeSdk.goWithCustomDialog(
-                            activity        = mainActivity,
-                            clientKey      = BuildConfig.PNGME_SDK_TOKEN,
-                            firstName      = user.firstName,
-                            lastName       = user.lastName,
-                            email          = user.email,
-                            phoneNumber    = user.phoneNumber,
-                            externalId     = user.externalId,
-                            companyName    = MainActivity.COMPANY_NAME,
-                            hasAcceptedTerms = true,
-                            onComplete     = { navigateToLoadApplication() },
-                            dialogStyle    = customStyle
+
+                    // choose overload
+                    if (checkedId == R.id.option_custom_pngme) {
+                        PngmeSdk.go(
+                            activity         = mainActivity,
+                            clientKey        = BuildConfig.PNGME_SDK_TOKEN,
+                            firstName        = user.firstName,
+                            lastName         = user.lastName,
+                            email            = user.email,
+                            phoneNumber      = user.phoneNumber,
+                            externalId       = user.externalId,
+                            companyName      = MainActivity.COMPANY_NAME,
+                            onComplete       = { navigateToLoadApplication() },
+                            dialogStyle      = customStyle
                         )
                     } else {
                         PngmeSdk.goWithCustomDialog(
-                            activity        = mainActivity,
-                            clientKey       = BuildConfig.PNGME_SDK_TOKEN,
-                            firstName       = user.firstName,
-                            lastName        = user.lastName,
-                            email           = user.email,
-                            phoneNumber     = user.phoneNumber,
-                            externalId      = user.externalId,
-                            companyName     = MainActivity.COMPANY_NAME,
-                            hasAcceptedTerms= true,
-                            onComplete      = { navigateToLoadApplication() }
+                            activity         = mainActivity,
+                            clientKey        = BuildConfig.PNGME_SDK_TOKEN,
+                            firstName        = user.firstName,
+                            lastName         = user.lastName,
+                            email            = user.email,
+                            phoneNumber      = user.phoneNumber,
+                            externalId       = user.externalId,
+                            companyName      = MainActivity.COMPANY_NAME,
+                            hasAcceptedTerms = true,
+                            onComplete       = { navigateToLoadApplication() }
                         )
                     }
                 }
             } else {
+                // no Pngme option selected
                 navigateToLoadApplication()
             }
         }

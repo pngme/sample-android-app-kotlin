@@ -42,23 +42,27 @@
             android:layout_marginTop="20dp"
             android:text="Receive promotions"/>
 
-        <CheckBox
-            android:id="@+id/use_pngme_checkbox"
+        <RadioGroup
+            android:id="@+id/pngme_style_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:text="Use Pngme"/>
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
-        <!-- New: Use Pngme with custom styling -->
-        <CheckBox
-            android:id="@+id/use_pngme_custom_style_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:text="Use Pngme with custom styling"/>
+            <RadioButton
+                android:id="@+id/option_default_pngme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use Pngme (default styling)"
+                android:textSize="20sp"/>
 
+            <RadioButton
+                android:id="@+id/option_custom_pngme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use Pngme with custom styling"
+                android:textSize="20sp"/>
+        </RadioGroup>
     </LinearLayout>
 
     <Button
