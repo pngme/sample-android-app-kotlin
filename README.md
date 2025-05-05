@@ -89,8 +89,129 @@ The `goWithCustomDialog` method performs three tasks.
 | hasAcceptedTerms | Set the value to 'true' if the user has accepted the terms and conditions when invoking the 'goWithCustomDialog' method. Defaults to false |
 | onComplete  | a callback function that is called when the `go` method has completed                                              |
 
+## New in v7.0.2: Customizable Dialog Styling
 
+Version 7.0.2 introduces the ability to customize the appearance of the Pngme dialog to match your app's branding.
+
+### Creating a Custom Style
+```kotlin
+val customStyle = PngmeDialogStyle(
+    // Colors
+    primaryColor = ContextCompat.getColor(this, R.color.your_brand_color),
+    backgroundColor = ContextCompat.getColor(this, R.color.your_background_color),
+    textColor = ContextCompat.getColor(this, R.color.your_text_color),
+    buttonBackgroundColor = ContextCompat.getColor(this, R.color.your_button_color),
+    buttonTextColor = ContextCompat.getColor(this, R.color.white),
+    
+    // Add your company logo
+    headerLogoDrawable = ContextCompat.getDrawable(this, R.drawable.your_company_logo),
+    
+    // Custom texts
+    customTitle = "Help us understand your finances",
+    customSmsDescription = "We analyze your financial messages to provide personalized insights.",
+    customPrivacyDescription = "Your data is encrypted and protected following industry standards.",
+    customButtonText = "I agree to continue",
+    
+    // Typography
+    titleTextSize = 20f,
+    bodyTextSize = 16f,
+    
+    // More customization options available...
+)
+```
+### Using Custom Styling
+
+#### Option 1: Set a global style for all dialogs
+
+```kotlin
+// Set a default style that will apply to all dialogs
+PngmeSdk.setDefaultStyle(customStyle)
+
+// Later, when launching the SDK, it will use the default style
+PngmeSdk.go(
+    activity = this,
+    clientKey = "your-sdk-token",
+    // Other parameters...
+)
+```
+
+#### Option 2: Style a specific dialog
+
+```kotlin
+// Apply style to a specific dialog instance
+PngmeSdk.go(
+    activity = this,
+    clientKey = "your-sdk-token",
+    firstName = "John", 
+    lastName = "Doe",
+    // Other parameters...
+    dialogStyle = customStyle  // Pass your custom style here
+)
+```
+
+### Returning to Default Styling
+
+To clear the default style and return to the original Pngme styling:
+
+```kotlin
+PngmeSdk.clearDefaultStyle()
+```
+## SDK Methods Reference
+
+### go()
+
+Standard implementation with default Pngme dialog flow:
+
+```kotlin
+fun go(
+    activity: AppCompatActivity,
+    clientKey: String,
+    firstName: String = "",
+    lastName: String = "",
+    email: String = "",
+    phoneNumber: String = "",
+    externalId: String,
+    companyName: String,
+    onComplete: Callback? = null
+)
+```
+
+With custom styling:
+
+```kotlin
+fun go(
+    activity: AppCompatActivity,
+    clientKey: String,
+    firstName: String = "",
+    lastName: String = "",
+    email: String = "",
+    phoneNumber: String = "",
+    externalId: String,
+    companyName: String,
+    onComplete: Callback? = null,
+    dialogStyle: PngmeDialogStyle? = null
+)
+```
+
+### goWithCustomDialog()
+
+For when you've implemented your own consent UI:
+
+```kotlin
+fun goWithCustomDialog(
+    activity: AppCompatActivity,
+    clientKey: String,
+    firstName: String = "",
+    lastName: String = "",
+    email: String = "",
+    phoneNumber: String = "",
+    externalId: String,
+    companyName: String,
+    hasAcceptedTerms: Boolean,
+    onComplete: Callback? = null
+```
 ### `isPermissionGranted()`
+Check if permissions have been granted:
 
 ```kotlin
 fun isPermissionGranted(context: Context): Boolean
