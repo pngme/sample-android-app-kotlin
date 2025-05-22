@@ -78,7 +78,7 @@ class PermissionFragment : Fragment() {
                             dialogStyle      = customStyle
                         )
                     } else {
-                        PngmeSdk.goWithCustomDialog(
+                        PngmeSdk.go(
                             activity         = mainActivity,
                             clientKey        = BuildConfig.PNGME_SDK_TOKEN,
                             firstName        = user.firstName,
@@ -87,7 +87,6 @@ class PermissionFragment : Fragment() {
                             phoneNumber      = user.phoneNumber,
                             externalId       = user.externalId,
                             companyName      = MainActivity.COMPANY_NAME,
-                            hasAcceptedTerms = true,
                             onComplete       = { navigateToLoadApplication() }
                         )
                     }
