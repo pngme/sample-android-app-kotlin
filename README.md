@@ -44,7 +44,7 @@ Add the following dependencies to `/app/build.gradle`.
 
 ```groovy
     dependencies {
-        implementation 'com.github.pngme:android-sdk:v7.0.1'
+    implementation 'com.github.pngme:android-sdk:v7.0.4'
     }
 ```
 
@@ -60,21 +60,24 @@ PNGME_SDK_TOKEN=XXXXXXXXXX
 
 ### Step 4
 
-Call the `PngmeSdk.goWithCustomDialog()` method in your app after the user has given consent to access their SMS messages.
+Call the `PngmeSdk.go() `  in your app.
 
 ```kotlin
- fun goWithCustomDialog(
-     activity: AppCompatActivity,
-     clientKey: String, // pass the SDK token here
-     phoneNumber: String, // optional
-     externalId: String,
-     companyName: String,
-     hasAcceptedTerms: Boolean, // default is false
-     onComplete: Callback? = null
- )
+fun go(
+    activity: AppCompatActivity,
+    clientKey: String,
+    firstName: String = "",
+    lastName: String = "",
+    email: String = "",
+    phoneNumber: String = "",
+    externalId: String,
+    companyName: String,
+    onComplete: Callback? = null,
+    dialogStyle: PngmeDialogStyle? = null
+)
 ```
 
-The `goWithCustomDialog` method performs three tasks.
+The `go` method performs three tasks.
 
 1. register a `user` in Pngme's system using an Android Onetime Worker
 2. check for new SMS messages and send them to Pngme's system every 30 minutes using an Android Background Worker
@@ -83,15 +86,19 @@ The `goWithCustomDialog` method performs three tasks.
 | ----------- | ------------------------------------------------------------------------------------------------------------------ |
 | activity    | a reference to the current Activity                                                                                |
 | clientKey   | the SDK Token from the [Pngme Dashboard Keys page](https://admin.pngme.com/keys)                                   |
+| firstName | the mobile phone user's first name (optional)                                                   |
+| lastName   | the mobile phone user's last name (optional)                               |
+| email | the mobile phone user's email address (optional)                                              |
 | phoneNumber | the mobile phone user's phone number, example `"23411234567"`                                                      |
 | externalId  | a unique identifier provided by your app (if none available, pass an empty string `""`)                            |
 | companyName | your company's name; this is used in the display header of the [Permission Dialog Flow](.docs/permission_flow.gif) |
 | hasAcceptedTerms | Set the value to 'true' if the user has accepted the terms and conditions when invoking the 'goWithCustomDialog' method. Defaults to false |
 | onComplete  | a callback function that is called when the `go` method has completed                                              |
+| dialogStyle  |optional custom styling for the dialog                                       |
 
-## New in v7.0.2: Customizable Dialog Styling
+## Customizable Dialog Styling
 
-Version 7.0.2 introduces the ability to customize the appearance of the Pngme dialog to match your app's branding.
+The SDK allows you to customize the appearance of the Pngme dialog to match your app's branding.
 
 ### Creating a Custom Style
 ```kotlin
@@ -172,44 +179,11 @@ fun go(
     phoneNumber: String = "",
     externalId: String,
     companyName: String,
-    onComplete: Callback? = null
-)
-```
-
-With custom styling:
-
-```kotlin
-fun go(
-    activity: AppCompatActivity,
-    clientKey: String,
-    firstName: String = "",
-    lastName: String = "",
-    email: String = "",
-    phoneNumber: String = "",
-    externalId: String,
-    companyName: String,
     onComplete: Callback? = null,
     dialogStyle: PngmeDialogStyle? = null
 )
 ```
 
-### goWithCustomDialog()
-
-For when you've implemented your own consent UI:
-
-```kotlin
-fun goWithCustomDialog(
-    activity: AppCompatActivity,
-    clientKey: String,
-    firstName: String = "",
-    lastName: String = "",
-    email: String = "",
-    phoneNumber: String = "",
-    externalId: String,
-    companyName: String,
-    hasAcceptedTerms: Boolean,
-    onComplete: Callback? = null
-```
 ### `isPermissionGranted()`
 Check if permissions have been granted:
 
